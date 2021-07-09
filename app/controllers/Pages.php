@@ -20,7 +20,8 @@ class Pages extends Controller
     public function about()
     {
         $data = [
-            'title' => 'Abouts Us'
+            'title' => 'Abouts Us',
+            'description' => 'App to share posts with users.'
         ];
 
         $this->view('pages/about', $data);

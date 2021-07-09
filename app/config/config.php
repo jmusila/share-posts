@@ -20,3 +20,6 @@ define('URLROOT', 'http://shareposts.com');
 
 /** Site Name */
 define('SITENAME', 'SharePosts');
+
+/** App Version */
+define('APP_VERSION', '1.0.0');
