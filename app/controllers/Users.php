@@ -64,6 +64,8 @@ class Users extends Controller
             $data['email_error'] = 'The email field is required.';
         } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $data['email_error'] = 'Please enter a valid email address.';
+        } elseif ($this->userModel->findUserByEmail($data['email'])) {
+            $data['email_error'] = 'Email is already taken.';
         }
 
         if (empty($data['password'])) {
@@ -91,8 +93,6 @@ class Users extends Controller
     {
         if (empty($data['email'])) {
             $data['email_error'] = 'The email field is required.';
-        } elseif ($this->userModel->findUserByEmail($data['email'])) {
-            $data['email_error'] = 'Email is already taken.';
         }
 
         if (empty($data['password'])) {
