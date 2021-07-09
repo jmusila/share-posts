@@ -45,25 +45,9 @@ class Users extends Controller
             $this->validateLogin($data);
         } else {
             $data = Users::userData();
-            
+
             $this->view('users/login', $data);
         }
-    }
-
-    public static function userData()
-    {
-        $data = [
-            'name' => '',
-            'email' => '',
-            'password' => '',
-            'confirm_password' => '',
-            'name_error' => '',
-            'email_error' => '',
-            'password_error' => '',
-            'confirm_password_error' => ''
-        ];
-
-        return $data;
     }
 
     /**
@@ -121,5 +105,21 @@ class Users extends Controller
         } else {
             $this->view('users/login', $data);
         }
+    }
+
+    public static function userData()
+    {
+        $data = [
+            'name' => '',
+            'email' => '',
+            'password' => '',
+            'confirm_password' => '',
+            'name_error' => '',
+            'email_error' => '',
+            'password_error' => '',
+            'confirm_password_error' => ''
+        ];
+
+        return $data;
     }
 }
