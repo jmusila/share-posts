@@ -16,7 +16,7 @@ define('DB_NAME', 'DB_NAME');
 define('APPROOT', dirname(dirname(__FILE__)));
 
 /**URL root */
-define('URLROOT', 'APP_URL');
+define('URLROOT', 'http://shareposts.com');
 
 /** Site Name */
 define('SITENAME', 'SharePosts');
