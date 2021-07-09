@@ -37,6 +37,15 @@
                         >
                         <span class="invalid-feedback"><?php echo $data['confirm_password_error']; ?></span>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="submit" value="Register" class="btn btn-success btn-block">
+                        </div>
+                        <div class="col">
+                            <a href="<?php echo URLROOT; ?>/users/login" class="btn btn-light btn-block">Have an account? 
+                            Login</a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
