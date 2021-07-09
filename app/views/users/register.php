@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email: <sup>*</sup></label>
-                        <input type="email" name="email" class="form-control form-control-lg 
+                        <input type="text" name="email" class="form-control form-control-lg 
                             <?php echo (!empty($data['email_error'])) ? "is-invalid" : ''; ?>"
                             value="<?php echo $data['email']; ?>"
                         >
@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label for="confirm_password">Confrim Password: <sup>*</sup></label>
-                        <input type="confirm_password" name="confirm_password" class="form-control form-control-lg 
+                        <input type="password" name="confirm_password" class="form-control form-control-lg 
                             <?php echo (!empty($data['confirm_password_error'])) ? 'is-invalid' : ''; ?>"
                             value="<?php echo $data['password']; ?>"
                         >

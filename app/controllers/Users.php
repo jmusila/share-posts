@@ -10,35 +10,22 @@ class Users extends Controller
     {
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            // Sanitize post data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data = [
-                'name' => trim($_POST['name']),
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'confirm_password' => trim($_POST['confirm_password']),
-                'name_error' => '',
-                'email_error' => '',
-                'password_error' => '',
-                'confirm_password_error' => ''
-            ];
+            $data = Users::registrationData();
 
-            $this->validateUser($data);
+            $data['name'] = trim($_POST['name']);
+
+            $data['email'] = trim($_POST['email']);
+
+            $data['password'] = trim($_POST['password']);
+
+            $data['confirm_password'] = trim($_POST['confirm_password']);
+
+            $this->validateUserRegistration($data);
         } else {
-            $data = [
-                'name' => '',
-                'email' => '',
-                'password' => '',
-                'confirm_password' => '',
-                'name_error' => '',
-                'email_error' => '',
-                'password_error' => '',
-                'confirm_password_error' => ''
-            ];
+            $data = Users::registrationData();
 
-            //Load view
             $this->view('users/register', $data);
         }
     }
@@ -60,10 +47,26 @@ class Users extends Controller
         }
     }
 
+    public static function registrationData()
+    {
+        $data = [
+            'name' => '',
+            'email' => '',
+            'password' => '',
+            'confirm_password' => '',
+            'name_error' => '',
+            'email_error' => '',
+            'password_error' => '',
+            'confirm_password_error' => ''
+        ];
+
+        return $data;
+    }
+
     /**
      * Validate User
      */
-    public function validateUser($data)
+    public function validateUserRegistration($data)
     {
         if (empty($data['name'])) {
             $data['name_error'] = 'The name field is required.';
@@ -82,7 +85,7 @@ class Users extends Controller
         }
 
         if (empty($data['confirm_password'])) {
-            $data['confirm_password_error'] = 'The confirm password field is required.';
+            $data['confirm_password_error'] = 'Please confirm password';
         } else {
             if ($data['password'] != $data['confirm_password']) {
                 $data['confirm_password_error'] = 'Passwords do not match.';
