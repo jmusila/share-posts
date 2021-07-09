@@ -23,7 +23,7 @@ class Users extends Controller
             ];
 
             //Load view
-            $this->view('users/register.php', $data);
+            $this->view('users/register', $data);
         }
     }
 }
