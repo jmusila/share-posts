@@ -12,7 +12,7 @@ class Users extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data = Users::registrationData();
+            $data = Users::userData();
 
             $data['name'] = trim($_POST['name']);
 
@@ -24,7 +24,7 @@ class Users extends Controller
 
             $this->validateUserRegistration($data);
         } else {
-            $data = Users::registrationData();
+            $data = Users::userData();
 
             $this->view('users/register', $data);
         }
@@ -34,20 +34,23 @@ class Users extends Controller
     {
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        } else {
-            $data = [
-                'email' => '',
-                'password' => '',
-                'email_error' => '',
-                'password_error' => ''
-            ];
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            //Load view
+            $data = Users::userData();
+
+            $data['email'] = trim($_POST['email']);
+
+            $data['password'] = trim($_POST['password']);
+
+            $this->validateLogin($data);
+        } else {
+            $data = Users::userData();
+            
             $this->view('users/login', $data);
         }
     }
 
-    public static function registrationData()
+    public static function userData()
     {
         $data = [
             'name' => '',
@@ -96,6 +99,27 @@ class Users extends Controller
             die('Success');
         } else {
             $this->view('users/register', $data);
+        }
+    }
+
+    public function validateLogin($data)
+    {
+        if (empty($data['email'])) {
+            $data['email_error'] = 'The email field is required.';
+        } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $data['email_error'] = 'Please enter a valid email address.';
+        }
+
+        if (empty($data['password'])) {
+            $data['password_error'] = 'The password field is required.';
+        } elseif (strlen($data['password']) < 6) {
+            $data['password_error'] = 'The password must be atleast 6 characters.';
+        }
+
+        if (empty($data['email_error']) && empty($data['password_error'])) {
+            die('Success');
+        } else {
+            $this->view('users/login', $data);
         }
     }
 }
