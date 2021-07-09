@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label for="confirm_password">Confrim Password: <sup>*</sup></label>
-                        <input type="password" name="password" class="form-control form-control-lg 
+                        <input type="confirm_password" name="confirm_password" class="form-control form-control-lg 
                             <?php echo (!empty($data['confirm_password_error'])) ? 'is_invalid' : ''; ?>"
                             value="<?php echo $data['password']; ?>"
                         >

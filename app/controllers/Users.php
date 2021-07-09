@@ -25,7 +25,7 @@ class Users extends Controller
                 'confirm_password_error' => ''
             ];
 
-
+            $this->validateUser($data);
         } else {
             $data = [
                 'name' => '',
@@ -65,26 +65,34 @@ class Users extends Controller
      */
     public function validateUser($data)
     {
-        if(empty($data['name'])){
+        if (empty($data['name'])) {
             $data['name_error'] = 'The name field is required.';
         }
 
-        if(empty($data['email'])){
+        if (empty($data['email'])) {
             $data['email_error'] = 'The email field is required.';
-        }elseif(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+        } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $data['email_error'] = 'Please enter a valid email address.';
         }
 
-        if(empty($data['password'])){
+        if (empty($data['password'])) {
             $data['password_error'] = 'The password field is required.';
-        }elseif(strlen($data['password']) < 6){
+        } elseif (strlen($data['password']) < 6) {
             $data['password_error'] = 'The password must be atleast 6 characters.';
         }
 
-        if(empty($data['confirm_password'])){
+        if (empty($data['confirm_password'])) {
             $data['confirm_password_error'] = 'The confirm password field is required.';
-        }elseif(!$data['password'] == $data['confirm_password']){
+        } else {
+            if ($data['password'] != $data['confirm_password']) {
+                $data['confirm_password_error'] = 'Passwords do not match.';
+            }
+        }
 
+        if (empty($data['email_error']) && empty($data['name_error']) && empty($data['password_error']) && empty($data['confirm_password_error'])) {
+            die('Success');
+        } else {
+            $this->view('users/register', $data);
         }
     }
 }
