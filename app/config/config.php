@@ -19,4 +19,4 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'APP_URL');
 
 /** Site Name */
-define('SITENAME', 'APP_NAME');
+define('SITENAME', 'SharePosts');
