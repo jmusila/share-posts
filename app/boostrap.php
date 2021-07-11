@@ -2,6 +2,8 @@
 
 require_once '../app/config/config.php';
 
+require_once '../app/helpers/url_helper.php';
+
 // Autoload Core Libraries
 spl_autoload_register(function($className){
     require_once 'libraries/' . $className . '.php';
