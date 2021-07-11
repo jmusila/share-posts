@@ -83,7 +83,9 @@ class Users extends Controller
         }
 
         if (empty($data['email_error']) && empty($data['name_error']) && empty($data['password_error']) && empty($data['confirm_password_error'])) {
-            die('Success');
+            
+            // Hash the password
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         } else {
             $this->view('users/register', $data);
         }

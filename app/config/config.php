@@ -7,10 +7,10 @@
 // $dotenv->load();
 
 /** DB Params */
-define('DB_HOST', 'DB_HOST');
-define('DB_USER', 'DB_USER');
-define('DB_PASS', 'DB_PASS');
-define('DB_NAME', 'DB_NAME');
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '123Postgres');
+define('DB_NAME', 'shareposts');
 
 /** App root */
 define('APPROOT', dirname(dirname(__FILE__)));
