@@ -15,12 +15,13 @@ class User
     public function register($data)
     {
         $this->db->query(
-            'INSERT INTO users (name, email, password) VALUES(:name, :email, :password)'
+            'INSERT INTO users (name, email, password, created_at, updated_at) VALUES(:name, :email, :password, :created_at, :updated_at)'
         );
 
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':password', $data['password']);
+        timestamps($data);
 
         if($this->db->execute()){
             return true;
