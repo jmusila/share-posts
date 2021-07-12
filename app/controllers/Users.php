@@ -125,7 +125,9 @@ class Users extends Controller
             'name_error' => '',
             'email_error' => '',
             'password_error' => '',
-            'confirm_password_error' => ''
+            'confirm_password_error' => '',
+            'created_at' => '',
+            'updated_at' => ''
         ];
 
         return $data;
