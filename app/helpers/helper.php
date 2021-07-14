@@ -14,13 +14,11 @@ function redirect($page)
 function timestamps($data)
 {
     if($data['created_at']){
-        $created_at = strtotime($data['created_at']);
-        $created_at = date('Y-m-d h:i:sa', $created_at);
+        $created_at = date('Y-m-d h:i:sa', time());
         return $created_at;
     }
 
     if($data['updated_at']){
-        $updated_at = strtotime($data['updated_at']);
-        date('Y-m-d h:i:sa', $updated_at);
+        date('Y-m-d h:i:sa', time());
     }
 }

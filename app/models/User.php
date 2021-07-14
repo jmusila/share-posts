@@ -21,7 +21,7 @@ class User
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':password', $data['password']);
-        $this->db->bind(':created_at', timestamps($data['created_at']));
+        $this->db->bind(':created_at', timestamps($data));
         $this->db->bind(':updated_at', timestamps($data));
 
         if($this->db->execute()){
