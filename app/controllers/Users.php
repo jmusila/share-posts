@@ -91,10 +91,10 @@ class Users extends Controller
 
             // Hash the password
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-            if($this->userModel->register($data)){
+            if ($this->userModel->register($data)) {
                 flash('register_success', 'User created successfully.');
                 return redirect('users/login');
-            }else{
+            } else {
                 die('Opps! Something went wrong');
             }
         } else {
@@ -114,8 +114,23 @@ class Users extends Controller
             $data['password_error'] = 'The password must be atleast 6 characters.';
         }
 
+        if ($this->userModel->findUserByEmail($data['email'])) {
+
+        }else{
+            $data['email_error'] = 'User with that email does not exist.';
+        }
+
         if (empty($data['email_error']) && empty($data['password_error'])) {
-            die('Success');
+            // Login user
+            $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+
+            if($loggedInUser){
+
+            }else{
+                $data['password_error'] = 'Please enter a valid password';
+
+                $this->view('users/login', $data);
+            }
         } else {
             $this->view('users/login', $data);
         }

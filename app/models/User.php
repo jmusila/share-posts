@@ -50,4 +50,27 @@ class User
             return false;
         }
     }
+
+    /**
+     * Login user
+     *
+     */
+    public function login($email, $password)
+    {
+        $this->db->query(
+            'SELECT * FROM user WHERE eamil = :email'
+        );
+
+        $this->db->bind(':email', $email);
+
+        $row = Database::first();
+
+        $hashed_password = $row->password;
+
+        if(password_verify($password, $hashed_password)){
+            return $row;
+        }else{
+            return false;
+        }
+    }
 }
