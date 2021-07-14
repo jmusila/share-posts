@@ -174,6 +174,10 @@ class Users extends Controller
      */
     public function logout()
     {
+        unset($_SESSION['id']);
+        unset($_SESSION['email']);
+        unset($_SESSION['name']);
+
         session_destroy();
 
         return redirect('users/login');
