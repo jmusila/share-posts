@@ -115,8 +115,7 @@ class Users extends Controller
         }
 
         if ($this->userModel->findUserByEmail($data['email'])) {
-
-        }else{
+        } else {
             $data['email_error'] = 'User with that email does not exist.';
         }
 
@@ -124,9 +123,9 @@ class Users extends Controller
             // Login user
             $loggedInUser = $this->userModel->login($data['email'], $data['password']);
 
-            if($loggedInUser){
-                die('Success');
-            }else{
+            if ($loggedInUser) {
+                $this->createUserSession($loggedInUser);
+            } else {
                 $data['password_error'] = 'Please enter a valid password';
 
                 $this->view('users/login', $data);
@@ -152,5 +151,10 @@ class Users extends Controller
         ];
 
         return $data;
+    }
+
+    public function createUserSession($loggedInUser)
+    {
+        
     }
 }
