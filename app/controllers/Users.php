@@ -2,6 +2,9 @@
 
 class Users extends Controller
 {
+    /**
+     * Instantiate the Users Class
+     */
     public function __construct()
     {
         $this->userModel = $this->model('User');
@@ -53,6 +56,8 @@ class Users extends Controller
 
     /**
      * Validate User
+     *
+     * @return void
      */
     public function validateUserRegistration($data)
     {
