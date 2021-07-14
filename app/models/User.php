@@ -58,7 +58,7 @@ class User
     public function login($email, $password)
     {
         $this->db->query(
-            'SELECT * FROM user WHERE eamil = :email'
+            'SELECT * FROM users WHERE email = :email'
         );
 
         $this->db->bind(':email', $email);

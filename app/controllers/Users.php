@@ -125,7 +125,7 @@ class Users extends Controller
             $loggedInUser = $this->userModel->login($data['email'], $data['password']);
 
             if($loggedInUser){
-
+                die('Success');
             }else{
                 $data['password_error'] = 'Please enter a valid password';
 
