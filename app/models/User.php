@@ -63,12 +63,12 @@ class User
 
         $this->db->bind(':email', $email);
 
-        $row = Database::first();
+        $user = Database::first();
 
-        $hashed_password = $row->password;
+        $hashed_password = $user->password;
 
         if(password_verify($password, $hashed_password)){
-            return $row;
+            return $user;
         }else{
             return false;
         }

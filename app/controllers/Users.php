@@ -153,8 +153,12 @@ class Users extends Controller
         return $data;
     }
 
-    public function createUserSession($loggedInUser)
+    public function createUserSession($user)
     {
-        
+        $_SESSION['id'] = $user->id;
+        $_SESSION['email'] = $user->email;
+        $_SESSION['name'] = $user->name;
+
+        return redirect('pages/index');
     }
 }
