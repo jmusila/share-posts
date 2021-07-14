@@ -153,6 +153,11 @@ class Users extends Controller
         return $data;
     }
 
+    /**
+     * Create user session
+     *
+     * @return redirect
+     */
     public function createUserSession($user)
     {
         $_SESSION['id'] = $user->id;
@@ -160,5 +165,17 @@ class Users extends Controller
         $_SESSION['name'] = $user->name;
 
         return redirect('pages/index');
+    }
+
+    /**
+     * Logout user
+     *
+     * Destroy the user session
+     */
+    public function logout()
+    {
+        session_destroy();
+
+        return redirect('users/login');
     }
 }
