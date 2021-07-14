@@ -7,6 +7,8 @@ class Posts extends Controller
      */
     public function index()
     {
-        $this->view('posts/index');
+        $data = [];
+
+        $this->view('posts/index', $data);
     }
 }
