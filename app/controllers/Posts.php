@@ -7,9 +7,11 @@ class Posts extends Controller
      */
     public function __construct()
     {
-        if(!isset($_SESSION['id'])){
+        if (!isLoggedIn()) {
             redirect('users/login');
         }
+
+        $this->postModel = $this->model('Post');
     }
 
     /**
@@ -17,7 +19,11 @@ class Posts extends Controller
      */
     public function index()
     {
-        $data = [];
+        $posts = $this->postModel->getPosts();
+
+        $data = [
+            'posts' => $posts
+        ];
 
         $this->view('posts/index', $data);
     }

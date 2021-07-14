@@ -182,13 +182,4 @@ class Users extends Controller
 
         return redirect('users/login');
     }
-
-    public function isLoggedIn()
-    {
-        if(isset($_SESSION['id'])){
-            return true;
-        }else{
-            return false;
-        }
-    }
 }
