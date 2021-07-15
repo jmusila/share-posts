@@ -6,7 +6,7 @@ class Post
 
     public function __construct()
     {
-        $this->db = new Database;
+        $this->db = new Database();
     }
 
     public function getPosts()
@@ -21,7 +21,8 @@ class Post
             INNER JOIN users
             ON posts.user_id = users.id
             ORDER BY posts.created_at DESC
-        ');
+        '
+        );
 
         $posts = Database::all();
 
@@ -40,9 +41,9 @@ class Post
         $this->db->bind(':created_at', $data['created_at']);
         $this->db->bind(':updated_at', $data['updated_at']);
 
-        if($this->db->execute()){
+        if ($this->db->execute()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -58,24 +59,24 @@ class Post
         $this->db->bind(':updated_at', $data['updated_at']);
         $this->db->bind(':id', $data['id']);
 
-        if($this->db->execute()){
+        if ($this->db->execute()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public function deletePost($data)
+    public function deletePost($id)
     {
         $this->db->query(
             'DELETE FROM posts WHERE id = :id'
         );
-        
-        $this->db->bind(':id', $data['id']);
 
-        if($this->db->execute()){
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

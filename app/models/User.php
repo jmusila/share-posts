@@ -6,7 +6,7 @@ class User
 
     public function __construct()
     {
-        $this->db = new Database;
+        $this->db = new Database();
     }
 
     /**
@@ -24,9 +24,9 @@ class User
         $this->db->bind(':created_at', $data['created_at']);
         $this->db->bind(':updated_at', $data['updated_at']);
 
-        if($this->db->execute()){
+        if ($this->db->execute()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -67,9 +67,9 @@ class User
 
         $hashed_password = $user->password;
 
-        if(password_verify($password, $hashed_password)){
+        if (password_verify($password, $hashed_password)) {
             return $user;
-        }else{
+        } else {
             return false;
         }
     }
