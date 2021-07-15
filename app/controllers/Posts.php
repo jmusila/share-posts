@@ -32,16 +32,34 @@ class Posts extends Controller
      */
     public function add()
     {
-        $data = $this->postData();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-        $this->view('posts/add', $data);
+            $data = Posts::postData();
+
+            $data['title'] = trim($data['title']);
+
+            $data['body'] = trim($data['body']);
+
+            $data['user_id'] = $_SESSION['id'];
+
+
+
+        } else {
+            $data = Posts::postData();
+
+            $this->view('posts/add', $data);
+        }
     }
 
-    public function postData()
+    public static function postData()
     {
         $data = [
             'title' => '',
             'body' => '',
+            'user_id' => '',
+            'title_error' => '',
+            'body_error' => '',
             'created_at' => date('Y-m-d h:i:s', time()),
             'updated_at' => date('Y-m-d h:i:s', time())
         ];
