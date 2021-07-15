@@ -57,11 +57,11 @@ class Posts extends Controller
      */
     public function validatePost($data)
     {
-        if (empty($data['title_error'])) {
+        if (empty($data['title'])) {
             $data['title_error'] = 'The title field is required';
         }
 
-        if (empty($data['body_error'])) {
+        if (empty($data['body'])) {
             $data['body_error'] = 'The body field is required';
         }
 
