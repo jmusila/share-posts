@@ -12,6 +12,7 @@ class Posts extends Controller
         }
 
         $this->postModel = $this->model('Post');
+        $this->userModel = $this->model('User');
     }
 
     /**
@@ -56,7 +57,12 @@ class Posts extends Controller
     {
         $post = $this->postModel->getSinglePost($id);
 
-        $data = Posts::postData();
+        $user = $this->userModel->getUserById($post->user_id);
+
+        $data = [
+            'post' => $post,
+            'user' => $user
+        ];
 
         $this->view('posts/show', $data);
     }
