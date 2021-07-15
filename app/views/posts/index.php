@@ -14,7 +14,7 @@
         <div class="card card-body mb-3">
             <h4 class="card-title"><?php echo $post->title; ?></h4>
             <div class="bg-light p-2 mb3">
-                Author: <?php echo $post->name; ?> on <?php echo $post->date_created; ?>
+                Writtten by: <?php echo $post->name; ?> on <?php echo $post->date_created; ?>
             </div>
             <p class="card-text mt-3">
                 <?php echo $post->body; ?>

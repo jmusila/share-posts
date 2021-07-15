@@ -52,6 +52,13 @@ class Posts extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $data = Posts::postData();
+        
+        $this->view('posts/show', $data);
+    }
+
     /**
      * Validate Posts
      */
