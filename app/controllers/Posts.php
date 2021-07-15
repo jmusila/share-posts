@@ -65,8 +65,8 @@ class Posts extends Controller
             $data['body_error'] = 'The body field is required';
         }
 
-        if (!empty($dat['title_error']) && !empty($data['body_error'])) {
-
+        if (empty($data['title_error']) && empty($data['body_error'])) {
+            die('SUCCESS');
         }else{
             $this->view('posts/add', $data);
         }
