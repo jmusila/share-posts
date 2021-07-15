@@ -2,7 +2,9 @@
 
 require_once '../app/libraries/DotEnv.php';
 
-(new DotEnv(__DIR__ . '/.env'))->load();
+$dir = $_SERVER['DOCUMENT_ROOT'];
+
+(new DotEnv($dir . '/.env'))->load();
 
 /** DB Params */
 define('DB_HOST', getenv('DB_HOST'));
