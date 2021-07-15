@@ -18,6 +18,8 @@ class Users extends Controller
 
             $data = Users::userData();
 
+            array_push($data, 'created_at');
+
             $data['name'] = trim($_POST['name']);
 
             $data['email'] = trim($_POST['email']);
@@ -146,8 +148,8 @@ class Users extends Controller
             'email_error' => '',
             'password_error' => '',
             'confirm_password_error' => '',
+            'updated_at' => timestamps(),
             'created_at' => timestamps(),
-            'updated_at' => timestamps()
         ];
 
         return $data;

@@ -39,6 +39,8 @@ class Posts extends Controller
 
             $data = Posts::postData();
 
+            array_push($data, 'created_at');
+
             $data['title'] = trim($_POST['title']);
 
             $data['body'] = trim($_POST['body']);
@@ -84,7 +86,9 @@ class Posts extends Controller
 
             $data['user_id'] = $_SESSION['id'];
 
-            $this->validatePost($data);
+            $data['id'] = $id;
+
+            $this->validateUpdatePost($data);
 
         } else {
 
@@ -132,6 +136,29 @@ class Posts extends Controller
         }
     }
 
+   public function validateUpdatePost($data)
+   {
+       if (empty($data['title'])) {
+           $data['title_error'] = 'The title field is required';
+       }
+
+       if (empty($data['body'])) {
+           $data['body_error'] = 'The body field is required';
+       }
+
+       if (empty($data['title_error']) && empty($data['body_error'])) {
+           if($this->postModel->updatePost($data)){
+               flash('post_message', 'Post updated successfully');
+
+               return redirect('posts');
+           }else{
+               die('Oops! Something went wrong');
+           }
+       }else{
+           $this->view('posts/edit', $data);
+       }
+   }
+
     public static function postData()
     {
         $data = [
@@ -141,8 +168,8 @@ class Posts extends Controller
             'user_id' => '',
             'title_error' => '',
             'body_error' => '',
-            'created_at' => timestamps(),
-            'updated_at' => timestamps()
+            'updated_at' => timestamps(),
+            'created_at' => timestamps()
         ];
 
         return $data;

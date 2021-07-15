@@ -47,6 +47,24 @@ class Post
         }
     }
 
+    public function updatePost($data)
+    {
+        $this->db->query(
+            'UPDATE posts SET title = :title, body = :body, updated_at = :updated_at WHERE id = :id'
+        );
+
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':body', $data['body']);
+        $this->db->bind(':updated_at', $data['updated_at']);
+        $this->db->bind(':id', $data['id']);
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getSinglePost($id)
     {
         $this->db->query(
