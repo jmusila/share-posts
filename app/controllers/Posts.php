@@ -111,6 +111,21 @@ class Posts extends Controller
     }
 
     /**
+     * Delete Posts
+     */
+    public function delete($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if($this->postModel->deletePost($id)){
+                flash('post_message', 'Post deleted successfully');
+                return redirect('posts');
+            }
+        }else{
+            die('Oops! Something went wrong');
+        }
+    }
+
+    /**
      * Validate Posts
      */
     public function validatePost($data)

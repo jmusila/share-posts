@@ -65,6 +65,21 @@ class Post
         }
     }
 
+    public function deletePost($data)
+    {
+        $this->db->query(
+            'DELETE FROM posts WHERE id = :id'
+        );
+        
+        $this->db->bind(':id', $data['id']);
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getSinglePost($id)
     {
         $this->db->query(
