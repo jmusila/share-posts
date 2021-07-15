@@ -48,7 +48,6 @@ class Posts extends Controller
             $data['user_id'] = $_SESSION['id'];
 
             $this->validatePost($data);
-
         } else {
             $data = Posts::postData();
 
@@ -89,12 +88,10 @@ class Posts extends Controller
             $data['id'] = $id;
 
             $this->validateUpdatePost($data);
-
         } else {
-
             $post = $this->postModel->getSinglePost($id);
 
-            if($post->user_id != $_SESSION['id']){
+            if ($post->user_id != $_SESSION['id']) {
                 return redirect('posts');
             }
 
@@ -115,12 +112,18 @@ class Posts extends Controller
      */
     public function delete($id)
     {
+        $post = $this->postModel->getSinglePost($id);
+
+        if ($post->user_id != $_SESSION['id']) {
+            return redirect('posts');
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if($this->postModel->deletePost($id)){
+            if ($this->postModel->deletePost($id)) {
                 flash('post_message', 'Post deleted successfully');
                 return redirect('posts');
             }
-        }else{
+        } else {
             die('Oops! Something went wrong');
         }
     }
@@ -139,40 +142,40 @@ class Posts extends Controller
         }
 
         if (empty($data['title_error']) && empty($data['body_error'])) {
-            if($this->postModel->addPost($data)){
+            if ($this->postModel->addPost($data)) {
                 flash('post_message', 'Post added successfully');
 
                 return redirect('posts');
-            }else{
+            } else {
                 die('Oops! Something went wrong');
             }
-        }else{
+        } else {
             $this->view('posts/add', $data);
         }
     }
 
-   public function validateUpdatePost($data)
-   {
-       if (empty($data['title'])) {
-           $data['title_error'] = 'The title field is required';
-       }
+    public function validateUpdatePost($data)
+    {
+        if (empty($data['title'])) {
+            $data['title_error'] = 'The title field is required';
+        }
 
-       if (empty($data['body'])) {
-           $data['body_error'] = 'The body field is required';
-       }
+        if (empty($data['body'])) {
+            $data['body_error'] = 'The body field is required';
+        }
 
-       if (empty($data['title_error']) && empty($data['body_error'])) {
-           if($this->postModel->updatePost($data)){
-               flash('post_message', 'Post updated successfully');
+        if (empty($data['title_error']) && empty($data['body_error'])) {
+            if ($this->postModel->updatePost($data)) {
+                flash('post_message', 'Post updated successfully');
 
-               return redirect('posts');
-           }else{
-               die('Oops! Something went wrong');
-           }
-       }else{
-           $this->view('posts/edit', $data);
-       }
-   }
+                return redirect('posts');
+            } else {
+                die('Oops! Something went wrong');
+            }
+        } else {
+            $this->view('posts/edit', $data);
+        }
+    }
 
     public static function postData()
     {
