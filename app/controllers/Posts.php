@@ -52,6 +52,23 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * Validate Posts
+     */
+    public function validatePost($data)
+    {
+        if(empty($data['title_error'])){
+            $data['title_error'] = 'The title field is required';
+        }
+        if(empty($data['title_body'])){
+            $data['title_body'] = 'The body field is required';
+        }
+
+        if(!empty($dat['title_error']) && !empty($data['body_error'])){
+            
+        }
+    }
+
     public static function postData()
     {
         $data = [
