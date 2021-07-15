@@ -46,4 +46,17 @@ class Post
             return false;
         }
     }
+
+    public function getSinglePost($id)
+    {
+        $this->db->query(
+            'SELECT * FROM posts WHERE id = :id'
+        );
+
+        $this->db->bind(':id', $id);
+
+        $post = Database::first();
+
+        return $post;
+    }
 }
