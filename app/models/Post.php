@@ -27,4 +27,23 @@ class Post
 
         return $posts;
     }
+
+    public function addPost($data)
+    {
+        $this->db->query(
+            'INSERT INTO posts (title, body, user_id, created_at, updated_at) VALUES(:title, :body, :user_id, :created_at, :updated_at)'
+        );
+
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':body', $data['body']);
+        $this->db->bind(':user_id', $data['user_id']);
+        $this->db->bind(':created_at', $data['created_at']);
+        $this->db->bind(':updated_at', $data['updated_at']);
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -66,7 +66,13 @@ class Posts extends Controller
         }
 
         if (empty($data['title_error']) && empty($data['body_error'])) {
-            die('SUCCESS');
+            if($this->postModel->addPost($data)){
+                flash('post_added', 'Post added successfully');
+
+                return redirect('posts');
+            }else{
+                die('Oops! Something went wrong');
+            }
         }else{
             $this->view('posts/add', $data);
         }
