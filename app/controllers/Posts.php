@@ -84,8 +84,6 @@ class Posts extends Controller
 
             $data['user_id'] = $_SESSION['id'];
 
-            $data['id'] = $id;
-
             $this->validatePost($data);
 
         } else {
@@ -95,7 +93,14 @@ class Posts extends Controller
             if($post->user_id != $_SESSION['id']){
                 return redirect('posts');
             }
+
             $data = Posts::postData();
+
+            $data['id'] = $id;
+
+            $data['title'] = $post->title;
+
+            $data['body'] = $post->body;
 
             $this->view('posts/edit', $data);
         }
