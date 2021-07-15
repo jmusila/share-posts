@@ -28,6 +28,7 @@ class Posts extends Controller
 
         $this->view('posts/index', $data);
     }
+
     /**
      * Create Posts
      */
@@ -68,6 +69,39 @@ class Posts extends Controller
     }
 
     /**
+     * Create Posts
+     */
+    public function edit($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = Posts::postData();
+
+            $data['title'] = trim($_POST['title']);
+
+            $data['body'] = trim($_POST['body']);
+
+            $data['user_id'] = $_SESSION['id'];
+
+            $data['id'] = $id;
+
+            $this->validatePost($data);
+
+        } else {
+
+            $post = $this->postModel->getSinglePost($id);
+
+            if($post->user_id != $_SESSION['id']){
+                return redirect('posts');
+            }
+            $data = Posts::postData();
+
+            $this->view('posts/edit', $data);
+        }
+    }
+
+    /**
      * Validate Posts
      */
     public function validatePost($data)
@@ -96,6 +130,7 @@ class Posts extends Controller
     public static function postData()
     {
         $data = [
+            'id' => '',
             'title' => '',
             'body' => '',
             'user_id' => '',
