@@ -86,8 +86,8 @@ class Posts extends Controller
             'user_id' => '',
             'title_error' => '',
             'body_error' => '',
-            'created_at' => date('Y-m-d h:i:s', time()),
-            'updated_at' => date('Y-m-d h:i:s', time())
+            'created_at' => timestamps(),
+            'updated_at' => timestamps()
         ];
 
         return $data;

@@ -146,8 +146,8 @@ class Users extends Controller
             'email_error' => '',
             'password_error' => '',
             'confirm_password_error' => '',
-            'created_at' => date('Y-m-d h:i:s', time()),
-            'updated_at' => date('Y-m-d h:i:s', time())
+            'created_at' => timestamps(),
+            'updated_at' => timestamps()
         ];
 
         return $data;
